@@ -20,7 +20,7 @@ class DataIngestorTest {
 
     private final Path dataFilePath = Paths.get("src/test/resources/test_file.csv");
     @Mock
-    DataContainer dataContainerMock;
+    InMemoryDao dataContainerMock;
 
     DataIngestor dataIngestor;
 
