@@ -1,4 +1,4 @@
-package com.bajdas.average.temperature.data;
+package com.bajdas.average.temperature.data.ingestion;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class DataHandler {
+public class FileHandler {
 
     @Value("${data.file.uri}")
     String dataFileUri;
@@ -25,7 +25,7 @@ public class DataHandler {
     FileTime lastModifiedTime;
 
     @Autowired
-    public DataHandler(DataIngestor dataIngestor) {
+    public FileHandler(DataIngestor dataIngestor) {
         this.dataIngestor = dataIngestor;
     }
 
@@ -34,8 +34,8 @@ public class DataHandler {
         dataFilePath = Paths.get(dataFileUri);
     }
 
-    @Scheduled(fixedDelayString = "${file.refresh.cadence.miliseconds}")
-    void checkFileUpdate() {
+    @Scheduled(fixedDelayString = "${file.refresh.cadence.milliseconds}")
+    void checkFileForUpdates() {
         FileTime actualLastModifiedTime = getLastModifiedTime();
         if (!actualLastModifiedTime.equals(lastModifiedTime)) {
             lastModifiedTime = actualLastModifiedTime;
