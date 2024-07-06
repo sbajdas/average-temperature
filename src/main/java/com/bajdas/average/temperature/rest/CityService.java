@@ -2,7 +2,7 @@ package com.bajdas.average.temperature.rest;
 
 import java.util.List;
 
-import com.bajdas.average.temperature.data.ingestion.AverageTempRepositoryDao;
+import com.bajdas.average.temperature.data.ingestion.AverageTempRepository;
 import com.bajdas.average.temperature.model.YearlyDataDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CityService {
 
-    final AverageTempRepositoryDao repository;
+    final AverageTempRepository repository;
 
     public List<YearlyDataDto> getCityData(String cityName) {
         return repository.getCityData(cityName);
