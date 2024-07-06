@@ -2,6 +2,7 @@ package com.bajdas.average.temperature.data.ingestion;
 
 import java.time.LocalDateTime;
 
+import com.bajdas.average.temperature.exceptions.ParsingException;
 import com.bajdas.average.temperature.model.DataPoint;
 import org.junit.jupiter.api.Test;
 

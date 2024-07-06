@@ -3,6 +3,7 @@ package com.bajdas.average.temperature.data.ingestion;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.bajdas.average.temperature.exceptions.ParsingException;
 import com.bajdas.average.temperature.model.DataPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

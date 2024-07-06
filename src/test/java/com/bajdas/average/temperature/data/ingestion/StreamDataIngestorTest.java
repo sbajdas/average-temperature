@@ -20,7 +20,7 @@ class StreamDataIngestorTest {
 
     private final Path dataFilePath = Paths.get("src/test/resources/test_file.csv");
     @Mock
-    InMemoryDao dataContainerMock;
+    AverageTempInMemoryDao dataContainerMock;
 
     StreamDataIngestor streamDataIngestor;
 
@@ -50,8 +50,8 @@ class StreamDataIngestorTest {
         //then
         Mockito.verify(dataContainerMock).update(captor.capture());
         WorldTemperatures actualData = captor.getValue();
-        assertEquals(1, actualData.getWorldTemperatures().size());
-        assertEquals(2, actualData.getCity("Warszawa").getCityTemperatures().size());
+        assertEquals(2, actualData.getWorldTemperatures().size());
+        assertEquals(1, actualData.getCity("Warszawa").size());
 
     }
 
