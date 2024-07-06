@@ -7,23 +7,18 @@ import java.util.stream.Stream;
 
 import com.bajdas.average.temperature.model.DataPoint;
 import com.bajdas.average.temperature.model.WorldTemperatures;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class DataIngestor {
+@RequiredArgsConstructor
+public class StreamDataIngestor implements DataIngestorInterface {
 
-    final AverageTempRepository dataContainer;
+    final AverageTempRepositoryDao dataContainer;
     final DatapointParser parser;
     private WorldTemperatures worldTemperatures;
-
-    @Autowired
-    public DataIngestor(AverageTempRepository dataContainer, DatapointParser parser) {
-        this.dataContainer = dataContainer;
-        this.parser = parser;
-    }
 
     public void ingestData(Path dataFilePath) {
         log.info("Processing data file: {}", dataFilePath);
@@ -32,7 +27,6 @@ public class DataIngestor {
         processFile(dataFilePath);
         long end = System.currentTimeMillis();
         log.info("File processing done in {} ms!", end - start);
-        log.info(worldTemperatures.getCity("Warszawa").toString());
 
         dataContainer.update(worldTemperatures);
     }

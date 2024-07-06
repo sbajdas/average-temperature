@@ -7,27 +7,23 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
 
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class FileHandler {
 
     @Value("${data.file.uri}")
     String dataFileUri;
-    final DataIngestor dataIngestor;
+    final DataIngestorInterface dataIngestor;
 
     Path dataFilePath;
     FileTime lastModifiedTime;
-
-    @Autowired
-    public FileHandler(DataIngestor dataIngestor) {
-        this.dataIngestor = dataIngestor;
-    }
 
     @PostConstruct
     void init(){
