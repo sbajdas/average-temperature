@@ -5,7 +5,7 @@ import java.util.List;
 import com.bajdas.average.temperature.model.WorldTemperatures;
 import com.bajdas.average.temperature.model.YearlyDataDto;
 
-public interface AverageTempRepositoryDao {
+public interface AverageTempRepository {
 
     void update(WorldTemperatures data);
 

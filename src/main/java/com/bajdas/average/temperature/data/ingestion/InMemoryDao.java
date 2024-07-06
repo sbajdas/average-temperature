@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class InMemoryDao implements AverageTempRepositoryDao {
+public class InMemoryDao implements AverageTempRepository {
 
     WorldTemperatures data;
 

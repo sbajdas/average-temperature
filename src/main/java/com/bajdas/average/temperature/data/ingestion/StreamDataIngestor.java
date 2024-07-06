@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class StreamDataIngestor implements DataIngestorInterface {
 
-    final AverageTempRepositoryDao dataContainer;
+    final AverageTempRepository dataContainer;
     final DatapointParser parser;
     private WorldTemperatures worldTemperatures;
 
