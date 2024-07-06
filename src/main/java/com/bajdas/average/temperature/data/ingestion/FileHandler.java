@@ -20,7 +20,7 @@ public class FileHandler {
 
     @Value("${data.file.uri}")
     String dataFileUri;
-    final DataIngestor dataIngestor;
+    final DataIngestorInterface dataIngestor;
 
     Path dataFilePath;
     FileTime lastModifiedTime;

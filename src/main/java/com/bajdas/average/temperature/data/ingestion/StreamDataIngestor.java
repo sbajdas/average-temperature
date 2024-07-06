@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class DataIngestor {
+public class StreamDataIngestor implements DataIngestorInterface {
 
     final AverageTempRepositoryDao dataContainer;
     final DatapointParser parser;
@@ -27,7 +27,6 @@ public class DataIngestor {
         processFile(dataFilePath);
         long end = System.currentTimeMillis();
         log.info("File processing done in {} ms!", end - start);
-        log.info(worldTemperatures.getCity("Warszawa").toString());
 
         dataContainer.update(worldTemperatures);
     }

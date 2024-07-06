@@ -16,17 +16,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
-class DataIngestorTest {
+class StreamDataIngestorTest {
 
     private final Path dataFilePath = Paths.get("src/test/resources/test_file.csv");
     @Mock
     InMemoryDao dataContainerMock;
 
-    DataIngestor dataIngestor;
+    StreamDataIngestor streamDataIngestor;
 
     @BeforeEach
     void setUp() {
-        dataIngestor = new DataIngestor(dataContainerMock, new DatapointParser());
+        streamDataIngestor = new StreamDataIngestor(dataContainerMock, new DatapointParser());
     }
 
     @Test
@@ -34,7 +34,7 @@ class DataIngestorTest {
         //given
 
         //when
-        dataIngestor.ingestData(dataFilePath);
+        streamDataIngestor.ingestData(dataFilePath);
 
         //then
         Mockito.verify(dataContainerMock).update(any());
@@ -45,7 +45,7 @@ class DataIngestorTest {
         //given
         var captor = ArgumentCaptor.forClass(WorldTemperatures.class);
         //when
-        dataIngestor.ingestData(dataFilePath);
+        streamDataIngestor.ingestData(dataFilePath);
 
         //then
         Mockito.verify(dataContainerMock).update(captor.capture());
