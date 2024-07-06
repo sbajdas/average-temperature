@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.bajdas.average.temperature.exceptions.CityNotFoundException;
 import com.bajdas.average.temperature.model.AverageTemp;
 import com.bajdas.average.temperature.model.CityTemperatures;
 import com.bajdas.average.temperature.model.WorldTemperatures;
@@ -25,7 +26,12 @@ public class InMemoryDao implements AverageTempRepository {
 
     @Override
     public List<YearlyDataDto> getCityData(String cityName) {
-        CityTemperatures cityTemperatures = data.getCity(cityName);
+        var cityTemperatures = data.getCity(cityName);
+        return cityTemperatures.map(InMemoryDao::getYearlyDataDtos)
+                               .orElseThrow(() -> new CityNotFoundException(cityName));
+    }
+
+    private static List<YearlyDataDto> getYearlyDataDtos(CityTemperatures cityTemperatures) {
         return cityTemperatures.getCityTemperatures().entrySet()
                                .stream()
                                .sorted(Map.Entry.comparingByKey())

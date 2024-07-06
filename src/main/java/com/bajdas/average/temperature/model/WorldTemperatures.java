@@ -1,6 +1,7 @@
 package com.bajdas.average.temperature.model;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 import lombok.Getter;
@@ -16,7 +17,7 @@ public class WorldTemperatures {
             (existing, newValue) -> existing.addData(dataPoint));
     }
 
-    public CityTemperatures getCity(String city) {
-        return worldTemperatures.get(city);
+    public Optional<CityTemperatures> getCity(String city) {
+        return Optional.ofNullable(worldTemperatures.get(city));
     }
 }

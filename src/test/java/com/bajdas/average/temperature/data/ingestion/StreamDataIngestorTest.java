@@ -51,7 +51,7 @@ class StreamDataIngestorTest {
         Mockito.verify(dataContainerMock).update(captor.capture());
         WorldTemperatures actualData = captor.getValue();
         assertEquals(1, actualData.getWorldTemperatures().size());
-        assertEquals(2, actualData.getCity("Warszawa").getCityTemperatures().size());
+        assertEquals(2, actualData.getCity("Warszawa").map(city -> city.getCityTemperatures().size()).orElse(0));
 
     }
 
