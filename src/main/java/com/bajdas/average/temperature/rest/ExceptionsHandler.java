@@ -1,5 +1,6 @@
-package com.bajdas.average.temperature.exceptions;
+package com.bajdas.average.temperature.rest;
 
+import com.bajdas.average.temperature.exceptions.CityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,9 +25,10 @@ public class ExceptionsHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handle(Exception exception) {
+        log.error("Unexpected exception: {}", exception.getMessage(), exception);
         return ResponseEntity
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(exception.getMessage());
+            .body("Unexpected error");
     }
 }

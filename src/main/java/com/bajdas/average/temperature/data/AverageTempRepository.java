@@ -1,4 +1,4 @@
-package com.bajdas.average.temperature.data.ingestion;
+package com.bajdas.average.temperature.data;
 
 import java.util.List;
 

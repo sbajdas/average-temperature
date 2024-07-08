@@ -5,14 +5,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
+import com.bajdas.average.temperature.data.AverageTempRepository;
 import com.bajdas.average.temperature.model.DataPoint;
 import com.bajdas.average.temperature.model.WorldTemperatures;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConditionalOnProperty(
+    value = "spark.ingestion",
+    havingValue = "false")
 @Slf4j
 @RequiredArgsConstructor
 public class StreamDataIngestor implements DataIngestorInterface {
