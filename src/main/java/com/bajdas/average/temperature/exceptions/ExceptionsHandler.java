@@ -24,9 +24,10 @@ public class ExceptionsHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handle(Exception exception) {
+        log.error("Unexpected exception: {}", exception.getMessage(), exception);
         return ResponseEntity
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(exception.getMessage());
+            .body("Unexpected error");
     }
 }
