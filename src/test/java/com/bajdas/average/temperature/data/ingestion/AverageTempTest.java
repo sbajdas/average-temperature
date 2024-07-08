@@ -13,9 +13,9 @@ class AverageTempTest {
     @Test
     void shouldCalculateAverageTempCorrectly() {
         //given
-        AverageTemp averageTemp = new AverageTemp(0.0);
         BigDecimal expected = BigDecimal.valueOf(10).setScale(1, RoundingMode.HALF_UP);
         //when
+        AverageTemp averageTemp = new AverageTemp(0.0);
         averageTemp.addData(10.0);
         averageTemp.addData(20.0);
 

@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import com.bajdas.average.temperature.model.DataPoint;
 import com.bajdas.average.temperature.model.WorldTemperatures;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -42,6 +43,7 @@ public class StreamDataIngestor implements DataIngestorInterface {
         }
     }
 
+    @SneakyThrows
     private void processLine(String line) {
         DataPoint dataPoint = parser.parse(line);
         worldTemperatures.addData(dataPoint);
