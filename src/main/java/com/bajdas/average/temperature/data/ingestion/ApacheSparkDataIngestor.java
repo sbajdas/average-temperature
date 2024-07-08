@@ -2,6 +2,7 @@ package com.bajdas.average.temperature.data.ingestion;
 
 import java.nio.file.Path;
 
+import com.bajdas.average.temperature.data.AverageTempRepository;
 import com.bajdas.average.temperature.model.WorldTemperatures;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -34,6 +35,7 @@ public class ApacheSparkDataIngestor implements DataIngestorInterface {
             .builder()
             .appName("Java Spark SQL basic example")
             .config("spark.master", "local[*]")
+            .config("spark.executor.cores", 4)
             .config("spark.sql.legacy.timeParserPolicy", "LEGACY")
             .config("spark.sql.files.maxPartitionBytes", "128MB")
             .getOrCreate();
