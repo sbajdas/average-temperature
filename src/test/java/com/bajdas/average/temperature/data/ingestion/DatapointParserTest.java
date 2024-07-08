@@ -14,7 +14,7 @@ class DatapointParserTest {
     private final DatapointParser parser = new DatapointParser();
 
     @Test
-    void shouldParseCSVToDatapoint() {
+    void shouldParseCSVToDatapoint() throws ParsingException {
         //given
         var testLine = "Warszawa;2018-10-20 19:12:51.235;13.12";
         var expectedTime = LocalDateTime.of(2018, 10, 20, 19, 12, 51, 235000000);
@@ -29,7 +29,7 @@ class DatapointParserTest {
     @Test
     void shouldThrowException() {
         //given
-        var testLine = "Warszawa;20218-10-20 19:12:51.235;13.12";
+        var testLine = "Warszawa;notaDate-10-20 19:12:51.235;1a3.12";
 
         //then
         assertThrows(ParsingException.class, () -> parser.parse(testLine));
