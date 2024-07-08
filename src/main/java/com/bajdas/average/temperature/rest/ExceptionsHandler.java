@@ -1,5 +1,6 @@
-package com.bajdas.average.temperature.exceptions;
+package com.bajdas.average.temperature.rest;
 
+import com.bajdas.average.temperature.exceptions.CityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
