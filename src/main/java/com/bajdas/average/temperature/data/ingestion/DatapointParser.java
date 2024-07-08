@@ -30,9 +30,9 @@ public class DatapointParser {
 
     public DataPoint parse(Row line) throws ParsingException {
         try {
-            return new DataPoint(line.get(0).toString(),
-                LocalDateTime.parse(line.get(1).toString(), formatter),
-                Double.parseDouble(line.get(2).toString()));
+            return new DataPoint(line.getString(0),
+                line.getTimestamp(1).toLocalDateTime(),
+                line.getDouble(2));
         } catch (Exception e) {
             log.error("Exception in parsing line: [{}]", line, e);
             throw new ParsingException();

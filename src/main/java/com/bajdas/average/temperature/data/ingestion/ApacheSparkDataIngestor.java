@@ -26,33 +26,25 @@ public class ApacheSparkDataIngestor implements DataIngestorInterface {
 
     final AverageTempRepository dataContainer;
     final DatapointParser parser;
-    private WorldTemperatures worldTemperatures;
+    final SparkSession sparkSession;
+    WorldTemperatures worldTemperatures;
 
 
     @Override
     public void ingestData(Path dataFilePath) {
-        SparkSession spark = SparkSession
-            .builder()
-            .appName("Java Spark SQL basic example")
-            .config("spark.master", "local[*]")
-            .config("spark.executor.cores", 4)
-            .config("spark.sql.legacy.timeParserPolicy", "LEGACY")
-            .config("spark.sql.files.maxPartitionBytes", "128MB")
-            .getOrCreate();
 
-        long start = System.currentTimeMillis();
-        Dataset<Row> dataset = processFile(dataFilePath, spark);
         worldTemperatures = new WorldTemperatures();
+        long start = System.currentTimeMillis();
+        Dataset<Row> dataset = processFile(dataFilePath);
         dataset.toLocalIterator()
                .forEachRemaining(this::processLine);
-        log.info("Finished Spark ingestion");
         long end = System.currentTimeMillis();
-        log.info("File processing done in {} ms!", end - start);
+        log.info("File processing via Spark done in {} ms!", end - start);
         dataContainer.update(worldTemperatures);
     }
 
-    private static Dataset<Row> processFile(Path dataFilePath, SparkSession spark) {
-        return spark.read()
+    private Dataset<Row> processFile(Path dataFilePath) {
+        return sparkSession.read()
                     .option("timestampFormat", "yyyy")
                     .option("delimiter", ";")
                     .schema("city STRING, time Timestamp, temp DOUBLE")

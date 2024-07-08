@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
+import com.bajdas.average.temperature.data.AverageTempRepository;
 import com.bajdas.average.temperature.model.DataPoint;
 import com.bajdas.average.temperature.model.WorldTemperatures;
 import lombok.RequiredArgsConstructor;

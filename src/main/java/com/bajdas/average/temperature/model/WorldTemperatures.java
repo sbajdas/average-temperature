@@ -17,7 +17,7 @@ public class WorldTemperatures {
             (existing, newValue) -> existing.addData(dataPoint.temperature()));
     }
 
-    public Map<CityYear, AverageTemp> getCity(String city) {
+    public Map<CityYear, AverageTemp> getByCity(String city) {
         return worldTemperatures.entrySet()
                                 .stream()
                                 .filter(entry -> entry.getKey().city().equals(city))

@@ -3,6 +3,7 @@ package com.bajdas.average.temperature.data.ingestion;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.bajdas.average.temperature.data.AverageTempInMemoryDao;
 import com.bajdas.average.temperature.model.WorldTemperatures;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,6 +45,7 @@ class StreamDataIngestorTest {
     void shouldProcessFile() {
         //given
         var captor = ArgumentCaptor.forClass(WorldTemperatures.class);
+
         //when
         streamDataIngestor.ingestData(dataFilePath);
 
@@ -51,7 +53,7 @@ class StreamDataIngestorTest {
         Mockito.verify(dataContainerMock).update(captor.capture());
         WorldTemperatures actualData = captor.getValue();
         assertEquals(2, actualData.getWorldTemperatures().size());
-        assertEquals(1, actualData.getCity("Warszawa").size());
+        assertEquals(1, actualData.getByCity("Warszawa").size());
 
     }
 
