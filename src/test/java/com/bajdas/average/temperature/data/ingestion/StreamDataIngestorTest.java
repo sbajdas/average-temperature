@@ -37,7 +37,7 @@ class StreamDataIngestorTest {
         streamDataIngestor.ingestData(dataFilePath);
 
         //then
-        Mockito.verify(dataContainerMock).update(any());
+        Mockito.verify(dataContainerMock).update(any(WorldTemperatures.class));
     }
 
     @Test
